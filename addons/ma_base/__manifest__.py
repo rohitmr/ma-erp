@@ -26,9 +26,6 @@
         'views/menu_views.xml',
     ],
     'assets': {
-        'web._assets_primary_variables': [
-            ('prepend', 'ma_base/static/src/scss/_variables.scss'),
-        ],
         'web.assets_backend': [
             'ma_base/static/src/css/ma_theme.css',
             'ma_base/static/src/xml/ma_dashboard.xml',
