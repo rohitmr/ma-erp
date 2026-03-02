@@ -25,7 +25,7 @@
                         string="Invoice"
                         type="object"
                         class="btn-sm btn-outline-primary"
-                        attrs="{'invisible': [('state', 'in', ['invoiced','received'])]}"/>
+                        invisible="state in ('invoiced', 'received')"/>
             </list>
         </field>
     </record>
@@ -58,7 +58,7 @@
                     <div>
                         <button name="action_create_invoice" type="object"
                                 string="Create Invoice" class="btn-primary"
-                                attrs="{'invisible': [('state', 'in', ['invoiced','received'])]}"/>
+                                invisible="state in ('invoiced', 'received')"/>
                     </div>
                 </sheet>
             </form>

@@ -58,11 +58,11 @@ class MaDivision(models.Model):
         if service_division:
             pending_jobs = ProjectTask.search_count([
                 ('project_id.division_id', '=', service_division.id),
-                ('stage_id.is_closed', '=', False),
+                ('stage_id.fold', '=', False),
             ])
             overdue_jobs = ProjectTask.search_count([
                 ('project_id.division_id', '=', service_division.id),
-                ('stage_id.is_closed', '=', False),
+                ('stage_id.fold', '=', False),
                 ('date_deadline', '<', fields.Date.today()),
             ])
 

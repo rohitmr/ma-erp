@@ -43,14 +43,14 @@ class ProjectTask(models.Model):
                 task.project_id.division_id.code == 'service'
             )
 
-    @api.depends('date_deadline', 'stage_id.is_closed')
+    @api.depends('date_deadline', 'stage_id.fold')
     def _compute_is_overdue(self):
         today = fields.Date.today()
         for task in self:
             task.is_overdue = (
                 bool(task.date_deadline)
-                and task.date_deadline < today
-                and not task.stage_id.is_closed
+                and task.date_deadline.date() < today
+                and not task.stage_id.fold
             )
 
     @api.model_create_multi

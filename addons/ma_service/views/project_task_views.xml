@@ -11,13 +11,13 @@
             <!-- Job number below task name -->
             <xpath expr="//field[@name='name']" position="before">
                 <field name="job_sequence" readonly="1"
-                       attrs="{'invisible': [('is_service_job', '=', False)]}"/>
+                       invisible="not is_service_job"/>
             </xpath>
 
             <!-- Service fields after description -->
             <xpath expr="//field[@name='description']" position="after">
                 <group string="Service Details"
-                       attrs="{'invisible': [('is_service_job', '=', False)]}">
+                       invisible="not is_service_job">
                     <group>
                         <field name="service_type_id"/>
                         <field name="govt_reference"/>
@@ -32,7 +32,9 @@
                 </group>
             </xpath>
 
-            <field name="is_service_job" invisible="1"/>
+            <xpath expr="//sheet" position="inside">
+                <field name="is_service_job" invisible="1"/>
+            </xpath>
 
         </field>
     </record>

@@ -51,7 +51,7 @@ export class MaDashboard extends Component {
             type: "ir.actions.act_window",
             name: "Overdue Invoices",
             res_model: "account.move",
-            view_mode: "list,form",
+            views: [[false, "list"], [false, "form"]],
             domain: [
                 ["move_type", "in", ["out_invoice", "out_refund"]],
                 ["state", "=", "posted"],
@@ -66,8 +66,8 @@ export class MaDashboard extends Component {
             type: "ir.actions.act_window",
             name: "Pending Service Jobs",
             res_model: "project.task",
-            view_mode: "list,kanban,form",
-            domain: [["stage_id.is_closed", "=", false]],
+            views: [[false, "list"], [false, "kanban"], [false, "form"]],
+            domain: [["stage_id.fold", "=", false]],
             context: { search_default_my_tasks: 0 },
         });
     }
@@ -77,7 +77,7 @@ export class MaDashboard extends Component {
             type: "ir.actions.act_window",
             name: "Contracting Projects",
             res_model: "project.project",
-            view_mode: "list,kanban,form",
+            views: [[false, "list"], [false, "kanban"], [false, "form"]],
         });
     }
 }

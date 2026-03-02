@@ -10,7 +10,7 @@
 
             <xpath expr="//page[@name='ma_erp']" position="inside">
                 <group string="Contracting Summary"
-                       attrs="{'invisible': [('contracting_project_count', '=', 0)]}">
+                       invisible="contracting_project_count == 0">
                     <group>
                         <field name="contracting_total_value" readonly="1"/>
                         <field name="contracting_total_invoiced" readonly="1"/>

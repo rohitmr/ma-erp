@@ -33,10 +33,10 @@
                 <header>
                     <button name="action_activate" string="Activate"
                             type="object" class="btn-primary"
-                            attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                            invisible="state != 'draft'"/>
                     <button name="action_cancel" string="Cancel"
                             type="object"
-                            attrs="{'invisible': [('state', 'not in', ['draft','active'])]}"/>
+                            invisible="state not in ('draft', 'active')"/>
                     <field name="state" widget="statusbar"
                            statusbar_visible="draft,active,expired,cancelled"/>
                 </header>

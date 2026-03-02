@@ -9,14 +9,16 @@
 
             <xpath expr="//field[@name='client_order_ref']" position="after">
                 <field name="client_po_number"
-                       attrs="{'invisible': [('division_id.code', '!=', 'contracting')]}"/>
+                       invisible="division_id.code != 'contracting'"/>
                 <field name="client_npo_number"
-                       attrs="{'invisible': [('division_id.code', '!=', 'contracting')]}"/>
+                       invisible="division_id.code != 'contracting'"/>
                 <field name="project_type_id"
-                       attrs="{'invisible': [('division_id.code', '!=', 'contracting')]}"/>
+                       invisible="division_id.code != 'contracting'"/>
             </xpath>
 
-            <field name="division_id" invisible="1"/>
+            <xpath expr="//sheet" position="inside">
+                <field name="division_id" invisible="1"/>
+            </xpath>
 
         </field>
     </record>

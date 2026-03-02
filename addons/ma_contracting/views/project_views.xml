@@ -13,7 +13,7 @@
                 <button class="oe_stat_button" type="object"
                         name="action_view_payment_milestones"
                         icon="fa-calendar-check-o"
-                        attrs="{'invisible': [('division_id.code', '!=', 'contracting')]}">
+                        invisible="division_id.code != 'contracting'">
                     <field name="payment_count" widget="statinfo" string="Milestones"/>
                 </button>
             </xpath>
@@ -21,7 +21,7 @@
             <!-- Contracting details after description -->
             <xpath expr="//field[@name='description']" position="after">
                 <group string="Contracting Details"
-                       attrs="{'invisible': [('division_id.code', '!=', 'contracting')]}">
+                       invisible="division_id.code != 'contracting'">
                     <group>
                         <field name="project_type_id"/>
                         <field name="client_po_number"/>
@@ -37,7 +37,7 @@
 
                 <!-- Financial summary -->
                 <group string="Financial Summary"
-                       attrs="{'invisible': [('division_id.code', '!=', 'contracting')]}">
+                       invisible="division_id.code != 'contracting'">
                     <group>
                         <field name="total_invoiced" readonly="1"/>
                         <field name="total_received" readonly="1"/>
@@ -51,7 +51,7 @@
                 </group>
 
                 <!-- Payment milestones inline tab -->
-                <notebook attrs="{'invisible': [('division_id.code', '!=', 'contracting')]}">
+                <notebook invisible="division_id.code != 'contracting'">
                     <page string="Payment Milestones" name="payment_milestones">
                         <field name="payment_ids">
                             <list editable="bottom"
@@ -75,14 +75,16 @@
                                         string="Create Invoice"
                                         type="object"
                                         class="btn-sm btn-outline-primary"
-                                        attrs="{'invisible': [('state', 'in', ['invoiced','received'])]}"/>
+                                        invisible="state in ('invoiced', 'received')"/>
                             </list>
                         </field>
                     </page>
                 </notebook>
             </xpath>
 
-            <field name="division_id" invisible="1"/>
+            <xpath expr="//sheet" position="inside">
+                <field name="division_id" invisible="1"/>
+            </xpath>
 
         </field>
     </record>
