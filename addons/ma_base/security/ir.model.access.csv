@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ma_division_user,ma.division user,model_ma_division,base.group_user,1,0,0,0
+access_ma_division_manager,ma.division manager,model_ma_division,group_ma_admin,1,1,1,1

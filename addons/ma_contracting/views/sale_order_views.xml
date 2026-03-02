@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_sale_order_form_ma_contracting" model="ir.ui.view">
+        <field name="name">sale.order.form.ma.contracting</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='client_order_ref']" position="after">
+                <field name="client_po_number"
+                       attrs="{'invisible': [('division_id.code', '!=', 'contracting')]}"/>
+                <field name="client_npo_number"
+                       attrs="{'invisible': [('division_id.code', '!=', 'contracting')]}"/>
+                <field name="project_type_id"
+                       attrs="{'invisible': [('division_id.code', '!=', 'contracting')]}"/>
+            </xpath>
+
+            <field name="division_id" invisible="1"/>
+
+        </field>
+    </record>
+
+</odoo>

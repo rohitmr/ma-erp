@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="cron_generate_contract_invoices" model="ir.cron">
+        <field name="name">MA Service: Generate Monthly Contract Invoices</field>
+        <field name="model_id" ref="model_ma_service_contract"/>
+        <field name="state">code</field>
+        <field name="code">model._generate_monthly_invoice()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="active" eval="True"/>
+        <field name="priority">5</field>
+    </record>
+
+    <record id="cron_check_expiring_contracts" model="ir.cron">
+        <field name="name">MA Service: Alert on Expiring Contracts</field>
+        <field name="model_id" ref="model_ma_service_contract"/>
+        <field name="state">code</field>
+        <field name="code">model._check_expiring_contracts()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="active" eval="True"/>
+        <field name="priority">5</field>
+    </record>
+
+</odoo>

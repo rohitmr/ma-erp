@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_ma_service_type_list" model="ir.ui.view">
+        <field name="name">ma.service.type.list</field>
+        <field name="model">ma.service.type</field>
+        <field name="arch" type="xml">
+            <list string="Service Types">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="default_fee"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_ma_service_type_form" model="ir.ui.view">
+        <field name="name">ma.service.type.form</field>
+        <field name="model">ma.service.type</field>
+        <field name="arch" type="xml">
+            <form string="Service Type">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group>
+                            <field name="default_fee"/>
+                            <field name="currency_id" groups="base.group_multi_currency"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <group string="Description">
+                        <field name="description" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ma_service_type" model="ir.actions.act_window">
+        <field name="name">Service Types</field>
+        <field name="res_model">ma.service.type</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

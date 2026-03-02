@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="email_template_contract_invoice" model="mail.template">
+        <field name="name">PRO Contract: Monthly Invoice</field>
+        <field name="model_id" ref="account.model_account_move"/>
+        <field name="subject">Invoice {{ object.name }} — PRO Contract</field>
+        <field name="body_html"><![CDATA[
+<p>Dear {{ object.partner_id.name }},</p>
+<p>Please find attached your monthly PRO support invoice <strong>{{ object.name }}</strong>
+   for the amount of <strong>{{ object.amount_total }} {{ object.currency_id.name }}</strong>.</p>
+<p>Due date: <strong>{{ object.invoice_date_due }}</strong></p>
+<p>For any queries, please contact us.</p>
+<p>Thank you.</p>
+        ]]></field>
+        <field name="report_template_ids" eval="[(4, ref('account.account_invoices'))]"/>
+        <field name="auto_delete" eval="True"/>
+    </record>
+
+    <record id="email_template_job_overdue" model="mail.template">
+        <field name="name">Service Job: Overdue Alert</field>
+        <field name="model_id" ref="project.model_project_task"/>
+        <field name="subject">Overdue Job Alert: {{ object.name }}</field>
+        <field name="body_html"><![CDATA[
+<p>Dear Team,</p>
+<p>The following service job is <strong>overdue</strong>:</p>
+<ul>
+    <li><strong>Job No.:</strong> {{ object.job_sequence }}</li>
+    <li><strong>Client:</strong> {{ object.partner_id.name }}</li>
+    <li><strong>Service:</strong> {{ object.service_type_id.name }}</li>
+    <li><strong>Due Date:</strong> {{ object.date_deadline }}</li>
+    <li><strong>Assigned To:</strong> {{ object.user_ids[0].name if object.user_ids else 'Unassigned' }}</li>
+</ul>
+<p>Please update the job status immediately.</p>
+        ]]></field>
+        <field name="auto_delete" eval="True"/>
+    </record>
+
+</odoo>

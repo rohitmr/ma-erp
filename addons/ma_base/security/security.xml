@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ===== Module Category ===== -->
+    <record id="module_category_ma_erp" model="ir.module.category">
+        <field name="name">MA ERP</field>
+        <field name="description">MA ERP custom modules for Service, Contracting and Trading divisions.</field>
+        <field name="sequence">1</field>
+    </record>
+
+    <!-- ===== Security Groups ===== -->
+
+    <!-- Service Division -->
+    <record id="group_ma_service_user" model="res.groups">
+        <field name="name">Service / User</field>
+        <field name="category_id" ref="module_category_ma_erp"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="group_ma_service_manager" model="res.groups">
+        <field name="name">Service / Manager</field>
+        <field name="category_id" ref="module_category_ma_erp"/>
+        <field name="implied_ids" eval="[(4, ref('group_ma_service_user'))]"/>
+    </record>
+
+    <!-- Contracting Division -->
+    <record id="group_ma_contracting_user" model="res.groups">
+        <field name="name">Contracting / User</field>
+        <field name="category_id" ref="module_category_ma_erp"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="group_ma_contracting_manager" model="res.groups">
+        <field name="name">Contracting / Manager</field>
+        <field name="category_id" ref="module_category_ma_erp"/>
+        <field name="implied_ids" eval="[(4, ref('group_ma_contracting_user'))]"/>
+    </record>
+
+    <!-- Trading Division -->
+    <record id="group_ma_trading_user" model="res.groups">
+        <field name="name">Trading / User</field>
+        <field name="category_id" ref="module_category_ma_erp"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="group_ma_trading_manager" model="res.groups">
+        <field name="name">Trading / Manager</field>
+        <field name="category_id" ref="module_category_ma_erp"/>
+        <field name="implied_ids" eval="[(4, ref('group_ma_trading_user'))]"/>
+    </record>
+
+    <!-- MA Administrator (full access) -->
+    <record id="group_ma_admin" model="res.groups">
+        <field name="name">Administrator</field>
+        <field name="category_id" ref="module_category_ma_erp"/>
+        <field name="implied_ids" eval="[
+            (4, ref('group_ma_service_manager')),
+            (4, ref('group_ma_contracting_manager')),
+            (4, ref('group_ma_trading_manager')),
+        ]"/>
+        <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+    </record>
+
+</odoo>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_contracting_boq" model="ir.actions.report">
+        <field name="name">BOQ / Quotation</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">ma_contracting.report_boq_document</field>
+        <field name="report_file">ma_contracting.report_boq_document</field>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_boq_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>Bill of Quantities</h2>
+                        <h4 t-field="doc.name"/>
+                        <hr/>
+
+                        <div class="row mt-3">
+                            <div class="col-6">
+                                <strong>Client:</strong><br/>
+                                <span t-field="doc.partner_id.name"/><br/>
+                                <span t-field="doc.partner_id.street"/>
+                            </div>
+                            <div class="col-6 text-end">
+                                <table class="table table-sm table-borderless">
+                                    <tr>
+                                        <td class="fw-bold">Quotation Date</td>
+                                        <td><span t-field="doc.date_order" t-options='{"widget": "date"}'/></td>
+                                    </tr>
+                                    <tr t-if="doc.client_po_number">
+                                        <td class="fw-bold">Client PO No.</td>
+                                        <td><span t-field="doc.client_po_number"/></td>
+                                    </tr>
+                                    <tr t-if="doc.project_type_id">
+                                        <td class="fw-bold">Project Type</td>
+                                        <td><span t-field="doc.project_type_id.name"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <table class="table table-sm mt-4">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Description</th>
+                                    <th class="text-end">Qty</th>
+                                    <th class="text-end">Unit</th>
+                                    <th class="text-end">Unit Price</th>
+                                    <th class="text-end">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="doc.order_line" t-as="line">
+                                    <tr>
+                                        <td><t t-esc="line_index + 1"/></td>
+                                        <td><span t-field="line.name"/></td>
+                                        <td class="text-end"><span t-field="line.product_uom_qty"/></td>
+                                        <td class="text-end"><span t-field="line.product_uom"/></td>
+                                        <td class="text-end">
+                                            <span t-field="line.price_unit"
+                                                  t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                        </td>
+                                        <td class="text-end">
+                                            <span t-field="line.price_subtotal"
+                                                  t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="4"/>
+                                    <td class="fw-bold text-end">Subtotal</td>
+                                    <td class="text-end">
+                                        <span t-field="doc.amount_untaxed"
+                                              t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                    </td>
+                                </tr>
+                                <tr t-if="doc.amount_tax">
+                                    <td colspan="4"/>
+                                    <td class="fw-bold text-end">Tax</td>
+                                    <td class="text-end">
+                                        <span t-field="doc.amount_tax"
+                                              t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                    </td>
+                                </tr>
+                                <tr class="table-dark">
+                                    <td colspan="4"/>
+                                    <td class="fw-bold text-end">TOTAL</td>
+                                    <td class="fw-bold text-end">
+                                        <span t-field="doc.amount_total"
+                                              t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                        <p class="mt-4 text-muted small">
+                            This quotation is valid for 30 days from the date of issue.
+                        </p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

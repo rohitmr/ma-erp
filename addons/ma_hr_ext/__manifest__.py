@@ -1,0 +1,25 @@
+{
+    'name': 'MA HR Extensions',
+    'version': '18.0.1.0.0',
+    'category': 'MA ERP',
+    'summary': 'HR extensions — employee document and expiry date tracking',
+    'author': 'MA ERP',
+    'license': 'LGPL-3',
+    'depends': [
+        'ma_base',
+        'hr',
+        'mail',
+    ],
+    'data': [
+        'security/ir.model.access.csv',
+        'data/document_type_data.xml',
+        'data/cron_data.xml',
+        'data/mail_template_data.xml',
+        'views/document_type_views.xml',
+        'views/hr_employee_views.xml',
+        'views/document_views.xml',
+        'views/menu_views.xml',
+    ],
+    'installable': True,
+    'auto_install': False,
+}

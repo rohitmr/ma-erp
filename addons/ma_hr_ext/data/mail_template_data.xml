@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="email_template_document_expiry" model="mail.template">
+        <field name="name">Employee Document: Expiry Alert</field>
+        <field name="model_id" ref="model_ma_hr_document"/>
+        <field name="subject">Document Expiry Alert: {{ object.document_type_id.name }} — {{ object.employee_id.name }}</field>
+        <field name="email_to">{{ object.employee_id.work_email }}</field>
+        <field name="body_html"><![CDATA[
+<p>Dear HR Team,</p>
+<p>The following employee document is expiring soon:</p>
+<table style="border-collapse: collapse; width: 100%;">
+    <tr>
+        <td style="padding: 6px; font-weight: bold;">Employee</td>
+        <td style="padding: 6px;">{{ object.employee_id.name }}</td>
+    </tr>
+    <tr>
+        <td style="padding: 6px; font-weight: bold;">Document Type</td>
+        <td style="padding: 6px;">{{ object.document_type_id.name }}</td>
+    </tr>
+    <tr>
+        <td style="padding: 6px; font-weight: bold;">Document Number</td>
+        <td style="padding: 6px;">{{ object.document_no or 'N/A' }}</td>
+    </tr>
+    <tr>
+        <td style="padding: 6px; font-weight: bold;">Expiry Date</td>
+        <td style="padding: 6px; color: #d9534f;"><strong>{{ object.expiry_date }}</strong></td>
+    </tr>
+    <tr>
+        <td style="padding: 6px; font-weight: bold;">Days Remaining</td>
+        <td style="padding: 6px; color: #d9534f;"><strong>{{ object.days_to_expiry }} days</strong></td>
+    </tr>
+</table>
+<p>Please take the necessary action to renew this document before it expires.</p>
+        ]]></field>
+        <field name="auto_delete" eval="True"/>
+    </record>
+
+</odoo>

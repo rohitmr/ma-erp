@@ -1,0 +1,28 @@
+.ma_dashboard {
+    background-color: #f8f9fa;
+    min-height: 100%;
+}
+
+.ma_dashboard_title {
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.ma_kpi_card {
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    border-radius: 12px !important;
+}
+
+.ma_kpi_card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12) !important;
+}
+
+.ma_kpi_card .card-body {
+    padding: 1.25rem;
+}
+
+.ma_kpi_card .fa {
+    opacity: 0.85;
+}

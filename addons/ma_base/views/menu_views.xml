@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ===== Top-level MA ERP Menu ===== -->
+    <menuitem id="menu_ma_erp_root"
+              name="MA ERP"
+              sequence="1"
+              web_icon="ma_base,static/src/img/icon.png"/>
+
+    <!-- Dashboard -->
+    <menuitem id="menu_ma_dashboard"
+              name="Dashboard"
+              parent="menu_ma_erp_root"
+              action="action_ma_dashboard_client"
+              sequence="1"/>
+
+    <!-- ===== Configuration sub-menu ===== -->
+    <menuitem id="menu_ma_config"
+              name="Configuration"
+              parent="menu_ma_erp_root"
+              sequence="100"
+              groups="group_ma_admin"/>
+
+    <menuitem id="menu_ma_divisions"
+              name="Divisions"
+              parent="menu_ma_config"
+              action="action_ma_division"
+              sequence="1"
+              groups="group_ma_admin"/>
+
+</odoo>

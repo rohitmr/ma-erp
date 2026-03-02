@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ma_project_type_user,ma.project.type user,model_ma_project_type,ma_base.group_ma_contracting_user,1,0,0,0
+access_ma_project_type_manager,ma.project.type manager,model_ma_project_type,ma_base.group_ma_contracting_manager,1,1,1,1
+access_ma_project_payment_user,ma.project.payment user,model_ma_project_payment,ma_base.group_ma_contracting_user,1,1,1,0
+access_ma_project_payment_manager,ma.project.payment manager,model_ma_project_payment,ma_base.group_ma_contracting_manager,1,1,1,1

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_ma_hr_document_list" model="ir.ui.view">
+        <field name="name">ma.hr.document.list</field>
+        <field name="model">ma.hr.document</field>
+        <field name="arch" type="xml">
+            <list string="Employee Documents"
+                  decoration-danger="expiry_status == 'expired'"
+                  decoration-warning="expiry_status == 'expiring_soon'">
+                <field name="employee_id"/>
+                <field name="document_type_id"/>
+                <field name="document_no"/>
+                <field name="expiry_date"/>
+                <field name="days_to_expiry" string="Days Left"/>
+                <field name="expiry_status" widget="badge"
+                       decoration-danger="expiry_status == 'expired'"
+                       decoration-warning="expiry_status == 'expiring_soon'"
+                       decoration-success="expiry_status == 'valid'"
+                       decoration-muted="expiry_status == 'no_expiry'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_ma_hr_document_form" model="ir.ui.view">
+        <field name="name">ma.hr.document.form</field>
+        <field name="model">ma.hr.document</field>
+        <field name="arch" type="xml">
+            <form string="Employee Document">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="document_type_id"/>
+                            <field name="document_no"/>
+                        </group>
+                        <group>
+                            <field name="issue_date"/>
+                            <field name="expiry_date"/>
+                            <field name="days_to_expiry" readonly="1"/>
+                            <field name="expiry_status" readonly="1"/>
+                        </group>
+                    </group>
+                    <group string="Document File">
+                        <field name="file" filename="file_name" widget="binary"/>
+                        <field name="file_name" invisible="1"/>
+                    </group>
+                    <group string="Notes">
+                        <field name="notes" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- All documents -->
+    <record id="action_ma_hr_document_all" model="ir.actions.act_window">
+        <field name="name">All Employee Documents</field>
+        <field name="res_model">ma.hr.document</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Expiring within 30 days -->
+    <record id="action_ma_hr_document_expiring" model="ir.actions.act_window">
+        <field name="name">Expiring Documents</field>
+        <field name="res_model">ma.hr.document</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('expiry_status', 'in', ['expiring_soon', 'expired'])]</field>
+    </record>
+
+</odoo>

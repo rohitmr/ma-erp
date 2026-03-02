@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ma_hr_document_type_hr_user,ma.hr.document.type hr user,model_ma_hr_document_type,hr.group_hr_user,1,0,0,0
+access_ma_hr_document_type_hr_manager,ma.hr.document.type hr manager,model_ma_hr_document_type,hr.group_hr_manager,1,1,1,1
+access_ma_hr_document_hr_user,ma.hr.document hr user,model_ma_hr_document,hr.group_hr_user,1,1,1,0
+access_ma_hr_document_hr_manager,ma.hr.document hr manager,model_ma_hr_document,hr.group_hr_manager,1,1,1,1

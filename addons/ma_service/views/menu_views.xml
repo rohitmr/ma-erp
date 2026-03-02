@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Service top-level menu under MA ERP -->
+    <menuitem id="menu_ma_service_root"
+              name="Service"
+              parent="ma_base.menu_ma_erp_root"
+              sequence="10"
+              groups="ma_base.group_ma_service_user"/>
+
+    <menuitem id="menu_ma_service_jobs"
+              name="Jobs"
+              parent="menu_ma_service_root"
+              action="action_service_job_all"
+              sequence="1"/>
+
+    <menuitem id="menu_ma_service_overdue"
+              name="Overdue Jobs"
+              parent="menu_ma_service_root"
+              action="action_service_job_overdue"
+              sequence="2"/>
+
+    <menuitem id="menu_ma_service_contracts"
+              name="PRO Contracts"
+              parent="menu_ma_service_root"
+              action="action_service_contract"
+              sequence="3"/>
+
+    <!-- Configuration -->
+    <menuitem id="menu_ma_service_config"
+              name="Service Config"
+              parent="ma_base.menu_ma_config"
+              sequence="10"
+              groups="ma_base.group_ma_service_manager"/>
+
+    <menuitem id="menu_ma_service_types"
+              name="Service Types"
+              parent="menu_ma_service_config"
+              action="action_ma_service_type"
+              sequence="1"/>
+
+</odoo>

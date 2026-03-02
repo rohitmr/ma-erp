@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_partner_form_ma" model="ir.ui.view">
+        <field name="name">res.partner.form.ma</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Smart buttons -->
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button class="oe_stat_button" type="object"
+                        name="action_view_service_jobs"
+                        icon="fa-wrench"
+                        attrs="{'invisible': [('service_job_count', '=', 0)]}">
+                    <field name="service_job_count" widget="statinfo" string="Service Jobs"/>
+                </button>
+                <button class="oe_stat_button" type="object"
+                        name="action_view_contracting_projects"
+                        icon="fa-building"
+                        attrs="{'invisible': [('contracting_project_count', '=', 0)]}">
+                    <field name="contracting_project_count" widget="statinfo" string="Projects"/>
+                </button>
+            </xpath>
+
+            <!-- MA ERP tab -->
+            <xpath expr="//page[@name='sales_purchases']" position="after">
+                <page string="MA ERP" name="ma_erp">
+                    <group>
+                        <group string="Classification">
+                            <field name="client_type"/>
+                            <field name="division_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

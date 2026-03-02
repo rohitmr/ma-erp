@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ma_service_type_user,ma.service.type user,model_ma_service_type,ma_base.group_ma_service_user,1,0,0,0
+access_ma_service_type_manager,ma.service.type manager,model_ma_service_type,ma_base.group_ma_service_manager,1,1,1,1
+access_ma_service_contract_user,ma.service.contract user,model_ma_service_contract,ma_base.group_ma_service_user,1,1,1,0
+access_ma_service_contract_manager,ma.service.contract manager,model_ma_service_contract,ma_base.group_ma_service_manager,1,1,1,1
+access_ma_service_contract_line_user,ma.service.contract.line user,model_ma_service_contract_line,ma_base.group_ma_service_user,1,1,1,0
+access_ma_service_contract_line_manager,ma.service.contract.line manager,model_ma_service_contract_line,ma_base.group_ma_service_manager,1,1,1,1

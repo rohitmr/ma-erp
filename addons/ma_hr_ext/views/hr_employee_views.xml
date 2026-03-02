@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_employee_form_ma_hr_ext" model="ir.ui.view">
+        <field name="name">hr.employee.form.ma.hr.ext</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Document expiry smart button -->
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button class="oe_stat_button" type="action"
+                        name="%(action_ma_hr_document_employee)d"
+                        context="{'default_employee_id': active_id}"
+                        icon="fa-id-card">
+                    <field name="document_count" widget="statinfo" string="Documents"/>
+                </button>
+            </xpath>
+
+            <!-- Documents tab -->
+            <xpath expr="//page[@name='resume']" position="after">
+                <page string="Documents &amp; IDs" name="ma_documents"
+                      groups="hr.group_hr_user">
+                    <group string="Key Identity Documents">
+                        <group>
+                            <field name="passport_no"/>
+                            <field name="passport_expiry"/>
+                            <field name="national_id_no"/>
+                            <field name="national_id_expiry"/>
+                        </group>
+                        <group>
+                            <field name="visa_no"/>
+                            <field name="visa_type"/>
+                            <field name="visa_expiry"/>
+                            <field name="labour_card_no"/>
+                            <field name="labour_card_expiry"/>
+                            <field name="health_card_no"/>
+                            <field name="health_card_expiry"/>
+                        </group>
+                    </group>
+
+                    <separator string="All Documents"/>
+                    <field name="document_ids" context="{'default_employee_id': active_id}">
+                        <list decoration-danger="expiry_status == 'expired'"
+                              decoration-warning="expiry_status == 'expiring_soon'"
+                              decoration-success="expiry_status == 'valid'">
+                            <field name="document_type_id"/>
+                            <field name="document_no"/>
+                            <field name="issue_date"/>
+                            <field name="expiry_date"/>
+                            <field name="days_to_expiry"/>
+                            <field name="expiry_status" widget="badge"
+                                   decoration-danger="expiry_status == 'expired'"
+                                   decoration-warning="expiry_status == 'expiring_soon'"
+                                   decoration-success="expiry_status == 'valid'"
+                                   decoration-muted="expiry_status == 'no_expiry'"/>
+                            <button name="%(action_ma_hr_document_employee)d"
+                                    string="View" type="action" class="btn-sm"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!-- Action for smart button -->
+    <record id="action_ma_hr_document_employee" model="ir.actions.act_window">
+        <field name="name">Employee Documents</field>
+        <field name="res_model">ma.hr.document</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('employee_id', '=', active_id)]</field>
+        <field name="context">{'default_employee_id': active_id}</field>
+    </record>
+
+</odoo>

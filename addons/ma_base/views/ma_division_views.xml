@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_ma_division_list" model="ir.ui.view">
+        <field name="name">ma.division.list</field>
+        <field name="model">ma.division</field>
+        <field name="arch" type="xml">
+            <list string="Divisions">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_ma_division_form" model="ir.ui.view">
+        <field name="name">ma.division.form</field>
+        <field name="model">ma.division</field>
+        <field name="arch" type="xml">
+            <form string="Division">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group>
+                            <field name="active"/>
+                            <field name="color" widget="color_picker"/>
+                        </group>
+                    </group>
+                    <group string="Description">
+                        <field name="description" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ma_division" model="ir.actions.act_window">
+        <field name="name">Divisions</field>
+        <field name="res_model">ma.division</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

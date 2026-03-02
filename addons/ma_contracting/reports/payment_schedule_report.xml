@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_payment_schedule" model="ir.actions.report">
+        <field name="name">Payment Schedule</field>
+        <field name="model">project.project</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">ma_contracting.report_payment_schedule_document</field>
+        <field name="report_file">ma_contracting.report_payment_schedule_document</field>
+        <field name="binding_model_id" ref="project.model_project_project"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_payment_schedule_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>Payment Schedule</h2>
+                        <h4 t-field="doc.name"/>
+                        <hr/>
+
+                        <div class="row mt-3 mb-4">
+                            <div class="col-6">
+                                <table class="table table-sm table-borderless">
+                                    <tr>
+                                        <td class="fw-bold">Client</td>
+                                        <td><span t-field="doc.partner_id"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Project Type</td>
+                                        <td><span t-field="doc.project_type_id.name"/></td>
+                                    </tr>
+                                    <tr t-if="doc.client_po_number">
+                                        <td class="fw-bold">Client PO No.</td>
+                                        <td><span t-field="doc.client_po_number"/></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-6">
+                                <table class="table table-sm table-borderless">
+                                    <tr>
+                                        <td class="fw-bold">Contract Value</td>
+                                        <td>
+                                            <span t-field="doc.contract_value"
+                                                  t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Retention %</td>
+                                        <td><span t-field="doc.retention_percentage"/>%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Retention Amount</td>
+                                        <td>
+                                            <span t-field="doc.retention_amount"
+                                                  t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <table class="table table-sm">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Milestone</th>
+                                    <th>Type</th>
+                                    <th class="text-end">%</th>
+                                    <th class="text-end">Amount</th>
+                                    <th>Due Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="doc.payment_ids" t-as="p">
+                                    <tr>
+                                        <td><t t-esc="p_index + 1"/></td>
+                                        <td><span t-field="p.name"/></td>
+                                        <td><span t-field="p.payment_type"/></td>
+                                        <td class="text-end"><span t-field="p.percentage"/>%</td>
+                                        <td class="text-end">
+                                            <span t-field="p.amount"
+                                                  t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                        </td>
+                                        <td><span t-field="p.due_date"/></td>
+                                        <td><span t-field="p.state"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                            <tfoot>
+                                <tr class="table-light">
+                                    <td colspan="4" class="fw-bold">Total Invoiced</td>
+                                    <td class="text-end fw-bold">
+                                        <span t-field="doc.total_invoiced"
+                                              t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                    </td>
+                                    <td colspan="2"/>
+                                </tr>
+                                <tr class="table-light">
+                                    <td colspan="4" class="fw-bold">Total Received</td>
+                                    <td class="text-end fw-bold">
+                                        <span t-field="doc.total_received"
+                                              t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                    </td>
+                                    <td colspan="2"/>
+                                </tr>
+                                <tr class="table-dark">
+                                    <td colspan="4" class="fw-bold">Pending Balance</td>
+                                    <td class="text-end fw-bold">
+                                        <span t-field="doc.pending_balance"
+                                              t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                    </td>
+                                    <td colspan="2"/>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

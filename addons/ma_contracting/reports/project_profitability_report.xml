@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_project_profitability" model="ir.actions.report">
+        <field name="name">Project Profitability</field>
+        <field name="model">project.project</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">ma_contracting.report_project_profitability_document</field>
+        <field name="report_file">ma_contracting.report_project_profitability_document</field>
+        <field name="binding_model_id" ref="project.model_project_project"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_project_profitability_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>Project Profitability</h2>
+                        <h4 t-field="doc.name"/>
+                        <hr/>
+
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <td class="fw-bold bg-light">Contract Value</td>
+                                            <td class="text-end">
+                                                <span t-field="doc.contract_value"
+                                                      t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fw-bold bg-light">Total Invoiced</td>
+                                            <td class="text-end">
+                                                <span t-field="doc.total_invoiced"
+                                                      t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fw-bold bg-light">Total Received</td>
+                                            <td class="text-end">
+                                                <span t-field="doc.total_received"
+                                                      t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="fw-bold bg-light">Pending Balance</td>
+                                            <td class="text-end">
+                                                <span t-field="doc.pending_balance"
+                                                      t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                            </td>
+                                        </tr>
+                                        <tr class="table-success">
+                                            <td class="fw-bold">Gross Profit</td>
+                                            <td class="text-end fw-bold">
+                                                <span t-field="doc.profitability_amount"
+                                                      t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                                (<span t-field="doc.profitability_percentage"/>%)
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

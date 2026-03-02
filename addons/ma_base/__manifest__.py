@@ -1,0 +1,38 @@
+{
+    'name': 'MA ERP Base',
+    'version': '18.0.1.0.0',
+    'category': 'MA ERP',
+    'summary': 'Base module — division management, security groups, unified dashboard',
+    'author': 'MA ERP',
+    'license': 'LGPL-3',
+    'depends': [
+        'base',
+        'mail',
+        'account',
+        'sale_management',
+        'purchase',
+        'project',
+        'stock',
+        'hr',
+        'portal',
+    ],
+    'data': [
+        'security/security.xml',
+        'security/ir.model.access.csv',
+        'data/division_data.xml',
+        'views/ma_division_views.xml',
+        'views/res_partner_views.xml',
+        'views/dashboard_views.xml',
+        'views/menu_views.xml',
+    ],
+    'assets': {
+        'web.assets_backend': [
+            'ma_base/static/src/css/ma_dashboard.css',
+            'ma_base/static/src/xml/ma_dashboard.xml',
+            'ma_base/static/src/js/ma_dashboard.js',
+        ],
+    },
+    'application': True,
+    'installable': True,
+    'auto_install': False,
+}

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="doc_type_passport" model="ma.hr.document.type">
+            <field name="name">Passport</field>
+            <field name="code">PASSPORT</field>
+            <field name="sequence">1</field>
+            <field name="has_expiry" eval="True"/>
+        </record>
+
+        <record id="doc_type_national_id" model="ma.hr.document.type">
+            <field name="name">National ID</field>
+            <field name="code">NATIONAL_ID</field>
+            <field name="sequence">2</field>
+            <field name="has_expiry" eval="True"/>
+        </record>
+
+        <record id="doc_type_visa" model="ma.hr.document.type">
+            <field name="name">Visa</field>
+            <field name="code">VISA</field>
+            <field name="sequence">3</field>
+            <field name="has_expiry" eval="True"/>
+        </record>
+
+        <record id="doc_type_labour_card" model="ma.hr.document.type">
+            <field name="name">Labour Card</field>
+            <field name="code">LABOUR_CARD</field>
+            <field name="sequence">4</field>
+            <field name="has_expiry" eval="True"/>
+        </record>
+
+        <record id="doc_type_health_card" model="ma.hr.document.type">
+            <field name="name">Health Card</field>
+            <field name="code">HEALTH_CARD</field>
+            <field name="sequence">5</field>
+            <field name="has_expiry" eval="True"/>
+        </record>
+
+        <record id="doc_type_employment_contract" model="ma.hr.document.type">
+            <field name="name">Employment Contract</field>
+            <field name="code">EMP_CONTRACT</field>
+            <field name="sequence">6</field>
+            <field name="has_expiry" eval="False"/>
+        </record>
+
+        <record id="doc_type_insurance" model="ma.hr.document.type">
+            <field name="name">Insurance</field>
+            <field name="code">INSURANCE</field>
+            <field name="sequence">7</field>
+            <field name="has_expiry" eval="True"/>
+        </record>
+
+        <record id="doc_type_other" model="ma.hr.document.type">
+            <field name="name">Other</field>
+            <field name="code">OTHER</field>
+            <field name="sequence">99</field>
+            <field name="has_expiry" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_ma_contracting_root"
+              name="Contracting"
+              parent="ma_base.menu_ma_erp_root"
+              sequence="20"
+              groups="ma_base.group_ma_contracting_user"/>
+
+    <menuitem id="menu_ma_contracting_projects"
+              name="Projects"
+              parent="menu_ma_contracting_root"
+              action="action_contracting_projects"
+              sequence="1"/>
+
+    <menuitem id="menu_ma_contracting_payments"
+              name="Payment Milestones"
+              parent="menu_ma_contracting_root"
+              action="action_ma_project_payment"
+              sequence="2"/>
+
+    <menuitem id="menu_ma_contracting_overdue"
+              name="Overdue Milestones"
+              parent="menu_ma_contracting_root"
+              action="action_ma_project_payment_overdue"
+              sequence="3"/>
+
+    <!-- Config -->
+    <menuitem id="menu_ma_contracting_config"
+              name="Contracting Config"
+              parent="ma_base.menu_ma_config"
+              sequence="20"
+              groups="ma_base.group_ma_contracting_manager"/>
+
+    <menuitem id="menu_ma_project_types"
+              name="Project Types"
+              parent="menu_ma_contracting_config"
+              action="action_ma_project_type"
+              sequence="1"/>
+
+</odoo>
